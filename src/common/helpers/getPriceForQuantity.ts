@@ -11,6 +11,7 @@ export const priceFormatStr = (unitPrice: number): string => {
   return `$${unitPrice.toFixed(2)}`;
 };
 
-export const totalPriceFormatStr = (totalPrice: number): string => {
-  return `Total: $${totalPrice.toFixed(2)}`;
+// Funkcja do wyświetlania całkowitej wartości w koszyku
+export const totalPriceFormatStr = (unitsNumber: number): string => {
+  return `Total: $${unitsNumber.toFixed(2)}`;
 };
