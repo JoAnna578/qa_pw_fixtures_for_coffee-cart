@@ -13,6 +13,6 @@ test('Check Espresso cost is added to Total on menu page', async ({
 
   // Sprawdzamy całkowitą wartość w koszyku
   await menuPage.assertTotalCheckoutContainsValue(
-    totalPriceFormatStr(COFFEE_PRICES.espresso, 1),
+    totalPriceFormatStr(COFFEE_PRICES.espresso * 1),
   );
 });

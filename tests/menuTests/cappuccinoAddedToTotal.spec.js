@@ -13,6 +13,6 @@ test('Check Cappuccino cost is added to Total on menu page', async ({
 
   // Sprawdzamy całkowitą wartość w koszyku
   await menuPage.assertTotalCheckoutContainsValue(
-    totalPriceFormatStr(COFFEE_PRICES.cappuccino, 1),
+    totalPriceFormatStr(COFFEE_PRICES.cappuccino * 1),
   );
 });
