@@ -1,19 +1,22 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test, expect } from '../fixtures/fixtures';
 
 test('Check Espresso removed from Cart after clicking remove button', async ({
-  page,
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
+  // Otwieramy stronę menu
   await menuPage.open();
+
+  // Dodajemy Espresso
   await menuPage.clickEspressoCup();
 
+  // Przechodzimy do koszyka
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
+  // Usuwamy wszystkie Espresso z koszyka
   await cartPage.clickRemoveAllEspressoButton();
+
+  // Sprawdzamy, że koszyk jest pusty
   await cartPage.assertNoCoffeeMessageIsVisible();
 });

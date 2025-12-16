@@ -1,19 +1,22 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test, expect } from '../fixtures/fixtures';
 
 test('Check Cappuccino removed from Cart after clicking remove button', async ({
-  page,
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
+  // Otwieramy stronę menu
   await menuPage.open();
+
+  // Dodajemy Cappuccino
   await menuPage.clickCappucinoCup();
 
+  // Przechodzimy do koszyka
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.clickRemoveAllCappucinoButton();
+  // Usuwamy wszystkie Cappuccino z koszyka
+  await cartPage.clickRemoveAllCappuccinoButton();
+
+  // Sprawdzamy, że koszyk jest pusty
   await cartPage.assertNoCoffeeMessageIsVisible();
 });

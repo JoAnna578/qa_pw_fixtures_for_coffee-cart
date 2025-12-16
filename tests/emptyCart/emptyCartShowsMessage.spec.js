@@ -1,9 +1,9 @@
-import { test } from '@playwright/test';
-import { CartPage } from '../../src/pages/CartPage';
+import { test, expect } from '../fixtures/fixtures';
 
-test('Assert empty cart shows correct message', async ({ page }) => {
-  const cartPage = new CartPage(page);
+test('Assert empty cart shows correct message', async ({ cartPage }) => {
+  // Otwieramy stronę koszyka
   await cartPage.open();
 
+  // Sprawdzamy komunikat "No coffee"
   await cartPage.assertNoCoffeeMessageIsVisible();
 });

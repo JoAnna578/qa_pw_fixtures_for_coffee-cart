@@ -1,11 +1,18 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
+import { test, expect } from '../fixtures/fixtures';
+import { COFFEE_PRICES } from '../../src/constants';
+import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
-test('Check Espresso cost is added to Total on menu page', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-
+test('Check Espresso cost is added to Total on menu page', async ({
+  menuPage,
+}) => {
+  // Otwieramy stronę menu
   await menuPage.open();
+
+  // Dodajemy Espresso
   await menuPage.clickEspressoCup();
 
-  await menuPage.assertTotalCheckoutContainsValue('Total: $10.00');
+  // Sprawdzamy całkowitą wartość w koszyku
+  await menuPage.assertTotalCheckoutContainsValue(
+    totalPriceFormatStr(COFFEE_PRICES.espresso, 1),
+  );
 });
